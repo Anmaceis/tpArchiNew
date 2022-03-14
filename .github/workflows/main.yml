@@ -47,7 +47,10 @@ jobs:
         
       - name: Run TI - create BDD and laucnh .jar
         run: npm run ci:e2e:prepare:docker
-        
+      
+      - name: Run TI - Install ci:e2:run
+        run: npm install ci:e2e:run
+      
       - name: Run TI - Run TI
         run: npm run ci:e2e:run
         
