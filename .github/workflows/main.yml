@@ -35,12 +35,24 @@ jobs:
       
         with:
           java-version: '11.x'
-      
+  
       - name: Install node.js packages
         run:  npm install
         
       - name: Run TU
         run:  chmod +x mvnw && npm run ci:backend:test
+        
+      - name: Run TI - Create .jar
+        run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
+        
+      - name: Run TI - create BDD and laucnh .jar
+        run: npm run ci:e2e:prepare:docker
+        
+      - name: Run TI - Run TI
+        run: npm run ci:e2e:run
+        
+      - name: Run TI - Clear docker
+        run: npm run ci:e2e:teardown
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
