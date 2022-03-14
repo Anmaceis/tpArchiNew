@@ -37,8 +37,10 @@ jobs:
           java-version: '11.x'
       
       - name: Install node.js packages
-      
         run:  npm install
+        
+      - name: Run TU
+        run:  chmod +x mvnw && npm run ci:backend:test
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
